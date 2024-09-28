@@ -1,4 +1,3 @@
-import {useQuery} from "react-query";
 import {fetchSales} from "../../../lib/sales.ts";
 import {useFiltersStore} from "../../../stores/use-filters.store.ts";
 import {useMemo} from "react";
@@ -9,13 +8,14 @@ import {
 } from "../../../utils/filters.helpers.ts";
 import {TransactionStatus} from "../../../types/types.ts";
 import {useSearchStore} from "../../../stores/use-search.store.ts";
+import {useQuery} from "@tanstack/react-query";
 
 export const useFilteredData = () => {
   const date = useFiltersStore(state=>state.date)
   const salesTypes = useFiltersStore(state=>state.salesType)
   const search = useSearchStore(state=>state.search)
 
-  const { data, isLoading, isError } = useQuery('sales', fetchSales);
+  const { data, isLoading, isError } = useQuery({ queryKey: ['sales'], queryFn: fetchSales });
 
   const filteredByDateData = useMemo(
     () => filterTransactionsByDate(data?.data ?? [], date),
