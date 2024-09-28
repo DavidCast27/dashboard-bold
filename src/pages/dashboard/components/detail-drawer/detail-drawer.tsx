@@ -11,11 +11,12 @@ import {
   Image,
   Text,
 } from '@chakra-ui/react';
-import {PaymentMethods, Transaction, TransactionStatus} from "../../../../types/types.ts";
-import {format} from "date-fns";
-import {currencyFormatter} from "../../../../utils/currency.formatter.ts";
-import {paymentMethodMapper, saleTypesMapper} from "../../../../utils/label-mappers.constants.ts";
+import {Transaction, TransactionStatus} from "../../../../types/types.ts";
+import {
+  transactionStatusLabelMapper
+} from "../../../../utils/label-mappers.constants.ts";
 import {CheckCircleIcon, WarningIcon} from "@chakra-ui/icons";
+import {useTransactionDetail} from "../../hooks/use-transaction-detail.tsx";
 
 
 type Props = {
@@ -24,24 +25,18 @@ type Props = {
   transaction: Transaction;
 }
 const DetailDrawer = ({isOpen, onClose, transaction}: Props) => {
+  const {
+    createdAtFormatted,
+    amountFormatted,
+    deductionFormatted,
+    paymentMethodImage,
+    paymentMethodLbl,
+    typeImage,
+    typeLabel,
+    hasDeduction
+  } = useTransactionDetail({transaction})
 
-  const {createdAt, amount, deduction, status, id, paymentMethod, salesType, franchise, transactionReference} = transaction
-  const createdAtFormatted = format(new Date(createdAt), 'dd/MM/yyyy - HH:mm:ss')
-  const amountFormatted = currencyFormatter(amount)
-  const deductionFormatted = currencyFormatter((deduction ?? 0)*-1)
-
-  const hasDeduction = status === TransactionStatus.SUCCESSFUL && Boolean(deduction)
-
-  const {image: paymentMethodImages, label: paymentMethodLabel} = paymentMethodMapper[paymentMethod]
-  const {image: typeImage, label: typeLabel} = saleTypesMapper[salesType]
-
-  const paymentMethodImage =  PaymentMethods.CARD === paymentMethod && franchise
-    ? paymentMethodImages[franchise]
-    : paymentMethodImages
-
-  const paymentMethodLbl = PaymentMethods.PSE === paymentMethod
-    ? paymentMethodLabel
-    : `****${transactionReference}`
+  const {status, id} = transaction
 
 
   return (
@@ -54,7 +49,7 @@ const DetailDrawer = ({isOpen, onClose, transaction}: Props) => {
             {TransactionStatus.SUCCESSFUL == status && <CheckCircleIcon boxSize={8} color="green.300"/>}
             {TransactionStatus.REJECTED == status && <WarningIcon boxSize={8} color="red.400"/>}
             <Heading as="h2" size="md" ml={2}>
-              ¡Cobro exitoso!
+              {transactionStatusLabelMapper[status]}
             </Heading>
             <Heading as="h1" size="lg" ml={2} textColor="bold-blue">
               {amountFormatted}
@@ -81,7 +76,7 @@ const DetailDrawer = ({isOpen, onClose, transaction}: Props) => {
           <Flex justifyContent="space-between">
             <Text textColor="bold-dark-gray">Método de pago:</Text>
             <Flex gap={4} alignItems="center" justifyContent="flex-start">
-              <Image boxSize={8} src={paymentMethodImage} alt={paymentMethodLabel} />
+              <Image boxSize={8} src={paymentMethodImage} alt={paymentMethodLbl} />
                 {paymentMethodLbl}
             </Flex>
           </Flex>

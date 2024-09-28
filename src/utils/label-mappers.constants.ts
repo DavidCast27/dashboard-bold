@@ -58,7 +58,7 @@ export const paymentMethodMapper = {
 
 export const saleTypesMapper = {
   [SalesType.PAYMENT_LINK]: {
-    label: 'Link de pago',
+    label: 'Link de pagos',
     image: paymentLinkImg,
   },
   [SalesType.TERMINAL]: {

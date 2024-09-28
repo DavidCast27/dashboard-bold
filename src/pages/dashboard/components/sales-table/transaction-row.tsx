@@ -1,35 +1,26 @@
 import {Flex, Image, Show, Td, Text, Tr, useDisclosure} from "@chakra-ui/react";
-import {format} from "date-fns";
-import {PaymentMethods, Transaction, TransactionStatus} from "../../../../types/types.ts";
-import {
-  paymentMethodMapper,
-  saleTypesMapper,
-  transactionStatusLabelMapper
-} from "../../../../utils/label-mappers.constants.ts";
-import {currencyFormatter} from "../../../../utils/currency.formatter.ts";
+import { Transaction} from "../../../../types/types.ts";
+import {transactionStatusLabelMapper} from "../../../../utils/label-mappers.constants.ts";
 import DetailDrawer from "../detail-drawer/detail-drawer.tsx";
+import {useTransactionDetail} from "../../hooks/use-transaction-detail.tsx";
 type Props = {
   transaction: Transaction;
 }
 const TransactionRow = ({transaction}:Props) => {
   const {isOpen, onOpen, onClose}  = useDisclosure()
 
-  const { status, id, paymentMethod, createdAt, amount, deduction, franchise, transactionReference, salesType} = transaction
-  const createdAtFormatted = format(new Date(createdAt), 'dd/MM/yyyy - HH:mm:ss')
-  const amountFormatted = currencyFormatter(amount)
-  const deductionFormatted = currencyFormatter((deduction ?? 0)*-1)
+  const {
+    createdAtFormatted,
+    amountFormatted,
+    deductionFormatted,
+    paymentMethodImage,
+    paymentMethodLbl,
+    typeImage,
+    typeLabel,
+    hasDeduction
+  } = useTransactionDetail({transaction})
 
-  const hasDeduction = status === TransactionStatus.SUCCESSFUL && Boolean(deduction)
-  const {image: paymentMethodImages, label: paymentMethodLabel} = paymentMethodMapper[paymentMethod]
-  const {image: typeImage, label: typeLabel} = saleTypesMapper[salesType]
-
-  const paymentMethodImage: string =  PaymentMethods.CARD === paymentMethod && franchise
-    ?paymentMethodImages[franchise]
-    : paymentMethodImages
-
-  const paymentMethodLbl = PaymentMethods.PSE === paymentMethod
-    ? paymentMethodLabel
-    : `****${transactionReference}`
+  const {status, id} = transaction
 
   return (
     <>
@@ -47,7 +38,7 @@ const TransactionRow = ({transaction}:Props) => {
         </Show>
         <Td py={hasDeduction ? 1 : 4}>
           <Flex gap={4} alignItems="center" justifyContent={{base: "center", md: "flex-start"}}>
-            <Image boxSize={8} src={paymentMethodImage} alt={paymentMethodLabel} />
+            <Image boxSize={8} src={paymentMethodImage} alt={paymentMethodLbl} />
             <Show above='md'>
               {paymentMethodLbl}
             </Show>
