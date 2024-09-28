@@ -1,8 +1,19 @@
-import {Card, CardHeader, Show, Table, Tbody, Text, Th, Thead, Tr} from "@chakra-ui/react";
+import {
+  Card,
+  CardHeader,
+  Show,
+  Table,
+  Tbody,
+  Text,
+  Th,
+  Thead,
+  Tr
+} from "@chakra-ui/react";
 import {useFiltersStore} from "../../../../stores/use-filters.store.ts";
 import {dateFilterLabelMapper} from "../../../../utils/label-mappers.constants.ts";
 import {Transaction} from "../../../../types/types.ts";
 import TransactionRow from "./transaction-row.tsx";
+import SearchInput from "../search-input/search-input.tsx";
 
 type Props = {
   transactions: Transaction[]
@@ -25,6 +36,7 @@ const SalesTable = ({transactions}: Props) => {
         <Text>Tus ventas de {label}</Text>
       </CardHeader>
       <>
+        <SearchInput />
         <Table size="sm" variant="customStriped">
           <Thead>
             <Tr>

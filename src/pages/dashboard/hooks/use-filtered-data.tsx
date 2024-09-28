@@ -2,12 +2,18 @@ import {useQuery} from "react-query";
 import {fetchSales} from "../../../lib/sales.ts";
 import {useFiltersStore} from "../../../stores/use-filters.store.ts";
 import {useMemo} from "react";
-import {filterTransactionsByDate, filterTransactionsByTypes} from "../../../utils/filters.helpers.ts";
+import {
+  filterTransactionsByDate,
+  filterTransactionsBySearch,
+  filterTransactionsByTypes
+} from "../../../utils/filters.helpers.ts";
 import {TransactionStatus} from "../../../types/types.ts";
+import {useSearchStore} from "../../../stores/use-search.store.ts";
 
 export const useFilteredData = () => {
   const date = useFiltersStore(state=>state.date)
   const salesTypes = useFiltersStore(state=>state.salesType)
+  const search = useSearchStore(state=>state.search)
 
   const { data, isLoading, isError } = useQuery('sales', fetchSales);
 
@@ -25,5 +31,10 @@ export const useFilteredData = () => {
     return successfulData.reduce((partialSum, acc) => partialSum + acc.amount, 0)
   },[filteredByDateData])
 
-  return { data: filteredByDateAndTypeData, isLoading, isError, totalSales }
+  const filteredByDateTypeAndSearchData = useMemo(
+    () => filterTransactionsBySearch(filteredByDateAndTypeData, search),
+    [search, filteredByDateAndTypeData]
+  )
+
+  return { data: filteredByDateTypeAndSearchData, isLoading, isError, totalSales }
 }

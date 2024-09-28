@@ -33,5 +33,13 @@ export function filterTransactionsByDate(transactions: Transaction[], dateType: 
 }
 
 export function filterTransactionsByTypes(transactions: Transaction[], salesTypes: SalesType[]) {
-  return transactions.filter((transactions)=> salesTypes.includes(transactions.salesType))
+  return transactions.filter((transaction)=> salesTypes.includes(transaction.salesType))
+}
+
+export function filterTransactionsBySearch (transactions: Transaction[], searchTerm: string): Transaction[] {
+  return transactions.filter(transaction =>
+    Object.values(transaction).some(value =>
+      String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  )
 }
