@@ -48,12 +48,14 @@ export const paymentMethodMapper = {
   },
   [PaymentMethods.CARD]: {
     label: 'Tarjeta',
-    image: {
-      [Franchise.AMEX]: amexImg,
-      [Franchise.VISA]: visaImg,
-      [Franchise.MASTERCARD]: mastercardImg,
-    }
+    image: ''
   }
+}
+
+export const franchiseMapper = {
+  [Franchise.AMEX]: amexImg,
+  [Franchise.VISA]: visaImg,
+  [Franchise.MASTERCARD]: mastercardImg,
 }
 
 export const saleTypesMapper = {

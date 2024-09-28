@@ -1,7 +1,8 @@
 import {format} from "date-fns";
 import {currencyFormatter} from "../../../utils/currency.formatter.ts";
 import {PaymentMethods, Transaction, TransactionStatus} from "../../../types/types.ts";
-import {paymentMethodMapper, saleTypesMapper} from "../../../utils/label-mappers.constants.ts";
+import {franchiseMapper, paymentMethodMapper, saleTypesMapper} from "../../../utils/label-mappers.constants.ts";
+
 type Props = {
   transaction: Transaction;
 }
@@ -15,9 +16,8 @@ export const useTransactionDetail = ({transaction}:Props) => {
   const {image: paymentMethodImages, label: paymentMethodLabel} = paymentMethodMapper[paymentMethod]
   const {image: typeImage, label: typeLabel} = saleTypesMapper[salesType]
 
-
   const paymentMethodImage: string =  PaymentMethods.CARD === paymentMethod && franchise
-    ?paymentMethodImages[franchise]
+    ? franchiseMapper[franchise]
     : paymentMethodImages
 
   const paymentMethodLbl = PaymentMethods.PSE === paymentMethod
