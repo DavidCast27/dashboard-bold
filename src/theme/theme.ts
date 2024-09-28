@@ -1,5 +1,6 @@
 import {extendTheme} from "@chakra-ui/react";
 import fonts from "./font.theme.ts";
+import {tableTheme} from "./components/table.theme.ts";
 
 const colors = {
   'bold-blue': '#121E6C',
@@ -19,5 +20,8 @@ export const theme = extendTheme({
 
       }
     }
+  },
+  components: {
+    Table: tableTheme
   }
 })
