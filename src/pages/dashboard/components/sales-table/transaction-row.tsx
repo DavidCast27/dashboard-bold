@@ -31,8 +31,6 @@ const TransactionRow = ({transaction}:Props) => {
     ? paymentMethodLabel
     : `****${transactionReference}`
 
-  console.log(hasDeduction)
-
   return (
     <>
       <Tr onClick={onOpen}>

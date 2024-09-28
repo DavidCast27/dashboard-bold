@@ -2,6 +2,7 @@ import {Card, CardBody, CardHeader, Text} from "@chakra-ui/react";
 import {useFiltersStore} from "../../../../stores/use-filters.store.ts";
 import {dateFilterFormatMapper, dateFilterLabelMapper} from "../../../../utils/label-mappers.constants.ts";
 import {currencyFormatter} from "../../../../utils/currency.formatter.ts";
+import TotalSalesTooltip from "./total-sales-tooltip.tsx";
 
 type Props = {
   totalSales: number
@@ -16,9 +17,17 @@ const TotalSaleCard = ({ totalSales }: Props) => {
 
   return (
     <Card as="article" rounded="xl" >
-      <CardHeader bgGradient="linear(to-r, bold-blue, bold-red)" textColor="white" justifyContent="space-between" display="flex" gap={6} roundedTop="xl">
+      <CardHeader
+        bgGradient="linear(to-r, bold-blue, bold-red)"
+        textColor="white"
+        justifyContent="space-between"
+        display="flex"
+        gap={6}
+        roundedTop="xl"
+        alignItems="center"
+      >
         <Text >Total de ventas de {label}</Text>
-        <Text>ⓘ</Text>
+        <TotalSalesTooltip />
       </CardHeader>
       <CardBody textAlign="center">
         <Text
