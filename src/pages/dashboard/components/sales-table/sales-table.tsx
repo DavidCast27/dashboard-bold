@@ -12,7 +12,7 @@ const SalesTable = ({transactions}: Props) => {
   const label = dateFilterLabelMapper[date].toLowerCase()
 
   return (
-    <Card>
+    <Card as="section">
       <CardHeader bgGradient="linear(to-r, bold-blue, bold-red)" textColor="white" justifyContent="space-between" display="flex" gap={6} roundedTop="xl">
         <Text>Tus ventas de {label}</Text>
       </CardHeader>
