@@ -20,3 +20,14 @@ Para compilar y generar la producción:
 ```bash
 npm run build
 ```
+Ejecutar pruebas
+```bash
+npm run test
+```
+Ejecutar pruebas con covertura
+```bash
+npm run test:coverage
+```
+
+pueden ver la aplicacion desplegada aca
+https://dashboard-bold.netlify.app/
