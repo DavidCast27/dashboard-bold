@@ -25,7 +25,7 @@ const SalesTable = ({transactions}: Props) => {
         <Text>Tus ventas de {label}</Text>
       </CardHeader>
       <>
-        <Table size={{base:"sm", md: "md"}} variant="striped">
+        <Table size="sm" variant="striped">
           <Thead>
             <Tr>
               <Th>Transacción</Th>

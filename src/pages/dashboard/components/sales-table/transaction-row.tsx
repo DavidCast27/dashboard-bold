@@ -21,11 +21,11 @@ const TransactionRow = ({transaction}:Props) => {
   } = useTransactionDetail({transaction})
 
   const {status, id} = transaction
-
+  const paddingY = hasDeduction ? 1 : 4
   return (
     <>
       <Tr onClick={onOpen}>
-        <Td py={hasDeduction ? 1 : 4} textColor="bold-blue">
+        <Td py={paddingY} textColor="bold-blue">
           <Flex gap={2} alignItems="center" justifyContent="flex-start">
             <Show above="md">
               <Image boxSize={6} src={typeImage} alt={typeLabel} />
@@ -34,9 +34,9 @@ const TransactionRow = ({transaction}:Props) => {
           </Flex>
         </Td>
         <Show above='md'>
-          <Td py={hasDeduction ? 1 : 4}>{createdAtFormatted}</Td>
+          <Td py={paddingY}>{createdAtFormatted}</Td>
         </Show>
-        <Td py={hasDeduction ? 1 : 4}>
+        <Td py={paddingY}>
           <Flex gap={4} alignItems="center" justifyContent={{base: "center", md: "flex-start"}}>
             <Image boxSize={8} src={paymentMethodImage} alt={paymentMethodLbl} />
             <Show above='md'>
@@ -45,9 +45,9 @@ const TransactionRow = ({transaction}:Props) => {
           </Flex>
         </Td>
         <Show above='md'>
-          <Td py={hasDeduction ? 1 : 4}>{id}</Td>
+          <Td py={paddingY}>{id}</Td>
         </Show>
-        <Td py={hasDeduction ? 1 : 4} textColor="bold-blue" >
+        <Td py={paddingY} textColor="bold-blue" >
           {amountFormatted}
           {hasDeduction &&  (
             <>
