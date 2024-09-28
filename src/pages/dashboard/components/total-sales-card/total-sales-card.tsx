@@ -1,4 +1,4 @@
-import {Card, CardBody, CardHeader, Text} from "@chakra-ui/react";
+import {Card, CardBody, CardHeader, Stack, Text} from "@chakra-ui/react";
 import {useFiltersStore} from "../../../../stores/use-filters.store.ts";
 import {dateFilterFormatMapper, dateFilterLabelMapper} from "../../../../utils/label-mappers.constants.ts";
 import {currencyFormatter} from "../../../../utils/currency.formatter.ts";
@@ -25,11 +25,12 @@ const TotalSaleCard = ({ totalSales }: Props) => {
         gap={6}
         roundedTop="xl"
         alignItems="center"
+        py={3}
       >
         <Text >Total de ventas de {label}</Text>
         <TotalSalesTooltip />
       </CardHeader>
-      <CardBody textAlign="center">
+      <CardBody as={Stack} textAlign="center" pb={2} gap={2}>
         <Text
           fontWeight="bold"
           bgGradient="linear(to-r, bold-blue, bold-red)"

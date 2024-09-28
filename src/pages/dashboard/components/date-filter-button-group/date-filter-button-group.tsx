@@ -18,7 +18,7 @@ function DateFilterButtonGroup() {
   const group = getRootProps()
 
   return (
-    <HStack {...group}  w="100%" bg="white"  rounded="xl" gap={0}>
+    <HStack {...group}  w="100%" bg="white"  rounded="md" gap={0} py={1} px={2}>
       {options.map((value) => {
         const radio = getRadioProps({ value })
         return (

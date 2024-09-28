@@ -28,7 +28,7 @@ const Dashboard = () => {
         md:`"totalSale dateFilter"
             "totalSale  typeFilter"`,
       }}
-      gridTemplateRows={{base: '2fr 60px 60px', md: '40px  1fr'}}
+      gridTemplateRows={{base: '2fr 40px 40px', md: '40px  1fr'}}
       gridTemplateColumns={{base: '1fr', md: '2fr 3fr'}}
     >
       <GridItem area={'totalSale'} justifyContent="end">

@@ -13,7 +13,15 @@ const SalesTable = ({transactions}: Props) => {
 
   return (
     <Card as="section">
-      <CardHeader bgGradient="linear(to-r, bold-blue, bold-red)" textColor="white" justifyContent="space-between" display="flex" gap={6} roundedTop="xl">
+      <CardHeader
+        bgGradient="linear(to-r, bold-blue, bold-red)"
+        textColor="white"
+        justifyContent="space-between"
+        display="flex"
+        gap={6}
+        roundedTop="xl"
+        py={3}
+      >
         <Text>Tus ventas de {label}</Text>
       </CardHeader>
       <>

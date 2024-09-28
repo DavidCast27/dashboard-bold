@@ -7,12 +7,12 @@ const RadioItem = (props: PropsWithChildren<UseRadioProps>) => {
   const checkbox = getRadioProps()
 
   return (
-    <Box as='label' mx="auto" cursor='pointer' textAlign="center" w="100%" px={2}>
+    <Box as='label' mx="auto" cursor='pointer' textAlign="center" w="100%" >
       <input {...input} />
       <Box
         {...checkbox}
-        my={2}
-        rounded="lg"
+        py={1}
+        rounded="2xl"
         _checked={{
           bg: 'bold-light-gray',
         }}
