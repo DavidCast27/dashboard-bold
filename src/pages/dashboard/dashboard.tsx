@@ -4,7 +4,6 @@ import {Box, Grid, GridItem} from "@chakra-ui/react";
 import SalesTable from "./components/sales-table/sales-table.tsx";
 import {useFilteredData} from "./hooks/use-filtered-data.tsx";
 import SaleTypeFilterMenu from "./components/sale-type-filter-menu/sale-type-filter-menu.tsx";
-import SalesTable2 from "./components/sales-table/sales-table-2.tsx";
 
 const Dashboard = () => {
 
@@ -43,7 +42,7 @@ const Dashboard = () => {
       </GridItem>
     </Grid>
     <SalesTable transactions={data}/>
-    <SalesTable2 transactions={data} />
+    {/*<SalesTable2 transactions={data} />*/}
   </Box>
   );
 };

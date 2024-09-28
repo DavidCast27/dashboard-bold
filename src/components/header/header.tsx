@@ -1,5 +1,5 @@
 import {Box, Image, Text} from "@chakra-ui/react";
-import logo from "../../assets/bold-white-logo.svg";
+import logo from "../../assets/img/bold-white-logo.svg";
 
 
 const Header = () => {

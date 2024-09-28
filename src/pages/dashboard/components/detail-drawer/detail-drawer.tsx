@@ -11,9 +11,12 @@ import {
   Image,
   Text,
 } from '@chakra-ui/react';
-import {Transaction, TransactionStatus} from "../../../../types/types.ts";
+import {PaymentMethods, Transaction, TransactionStatus} from "../../../../types/types.ts";
 import {format} from "date-fns";
 import {currencyFormatter} from "../../../../utils/currency.formatter.ts";
+import {paymentMethodMapper, saleTypesMapper} from "../../../../utils/label-mappers.constants.ts";
+import {CheckCircleIcon, WarningIcon} from "@chakra-ui/icons";
+
 
 type Props = {
   isOpen: boolean;
@@ -22,21 +25,34 @@ type Props = {
 }
 const DetailDrawer = ({isOpen, onClose, transaction}: Props) => {
 
-  const {createdAt, amount, deduction, status, id, paymentMethod, salesType} = transaction
+  const {createdAt, amount, deduction, status, id, paymentMethod, salesType, franchise, transactionReference} = transaction
   const createdAtFormatted = format(new Date(createdAt), 'dd/MM/yyyy - HH:mm:ss')
   const amountFormatted = currencyFormatter(amount)
   const deductionFormatted = currencyFormatter((deduction ?? 0)*-1)
 
   const hasDeduction = status === TransactionStatus.SUCCESSFUL && Boolean(deduction)
 
+  const {image: paymentMethodImages, label: paymentMethodLabel} = paymentMethodMapper[paymentMethod]
+  const {image: typeImage, label: typeLabel} = saleTypesMapper[salesType]
+
+  const paymentMethodImage =  PaymentMethods.CARD === paymentMethod && franchise
+    ? paymentMethodImages[franchise]
+    : paymentMethodImages
+
+  const paymentMethodLbl = PaymentMethods.PSE === paymentMethod
+    ? paymentMethodLabel
+    : `****${transactionReference}`
+
+
   return (
     <Drawer isOpen={isOpen} placement='right' onClose={onClose} size="md">
       <DrawerOverlay />
-      <DrawerContent roundedLeft={20}>
+      <DrawerContent roundedLeft={{base: 0, md: 20}}>
         <DrawerCloseButton />
         <DrawerHeader mb={20} mt={12}>
           <Flex alignItems="center" justifyContent="center" direction="column" gap={2}>
-            <Image src="/path/to/your/check-icon.svg" alt="Checkmark" />
+            {TransactionStatus.SUCCESSFUL == status && <CheckCircleIcon boxSize={8} color="green.300"/>}
+            {TransactionStatus.REJECTED == status && <WarningIcon boxSize={8} color="red.400"/>}
             <Heading as="h2" size="md" ml={2}>
               ¡Cobro exitoso!
             </Heading>
@@ -64,16 +80,20 @@ const DetailDrawer = ({isOpen, onClose, transaction}: Props) => {
 
           <Flex justifyContent="space-between">
             <Text textColor="bold-dark-gray">Método de pago:</Text>
-            <Text fontWeight="bold">{paymentMethod}</Text>
+            <Flex gap={4} alignItems="center" justifyContent="flex-start">
+              <Image boxSize={8} src={paymentMethodImage} alt={paymentMethodLabel} />
+                {paymentMethodLbl}
+            </Flex>
           </Flex>
 
           <Flex justifyContent="space-between">
             <Text textColor="bold-dark-gray">Tipo de pago:</Text>
-            <Text fontWeight="bold">{salesType}</Text>
+            <Flex gap={4} alignItems="center" justifyContent="flex-start">
+              <Image boxSize={6} src={typeImage} alt={typeLabel} />
+              <Text fontWeight="bold">{typeLabel}</Text>
+            </Flex>
           </Flex>
         </DrawerBody>
-
-
       </DrawerContent>
     </Drawer>
   );
