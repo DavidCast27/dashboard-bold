@@ -7,11 +7,12 @@ import RadioItem from "./radio-item.tsx";
 
 function DateFilterButtonGroup() {
   const changeDate = useFiltersStore(state=> state.changeDate)
+  const defaultDate = useFiltersStore((state)=> state.date)
   const options = [DateType.DAY, DateType.WEEK, DateType.MONTH]
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'date-select',
-    defaultValue: DateType.DAY,
+    defaultValue: defaultDate,
     onChange: changeDate,
   })
 
