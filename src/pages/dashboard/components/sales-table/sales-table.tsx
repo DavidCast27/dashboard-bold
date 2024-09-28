@@ -10,7 +10,7 @@ import {
   Tr
 } from "@chakra-ui/react";
 import {useFiltersStore} from "../../../../stores/use-filters.store.ts";
-import {dateFilterLabelMapper} from "../../../../utils/label-mappers.constants.ts";
+import {dateFilterLabelMapper} from "../../../../utils/mappers.ts";
 import {Transaction} from "../../../../types/types.ts";
 import TransactionRow from "./transaction-row.tsx";
 import SearchInput from "../search-input/search-input.tsx";

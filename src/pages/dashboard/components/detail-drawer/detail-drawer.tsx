@@ -14,7 +14,7 @@ import {
 import {Transaction, TransactionStatus} from "../../../../types/types.ts";
 import {
   transactionStatusLabelMapper
-} from "../../../../utils/label-mappers.constants.ts";
+} from "../../../../utils/mappers.ts";
 import {CheckCircleIcon, WarningIcon} from "@chakra-ui/icons";
 import {useTransactionDetail} from "../../hooks/use-transaction-detail.tsx";
 

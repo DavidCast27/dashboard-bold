@@ -1,7 +1,7 @@
 import {format} from "date-fns";
 import {currencyFormatter} from "../../../utils/currency.formatter.ts";
 import {PaymentMethods, Transaction, TransactionStatus} from "../../../types/types.ts";
-import {franchiseMapper, paymentMethodMapper, saleTypesMapper} from "../../../utils/label-mappers.constants.ts";
+import {franchiseMapper, paymentMethodMapper, saleTypesMapper} from "../../../utils/mappers.ts";
 
 type Props = {
   transaction: Transaction;

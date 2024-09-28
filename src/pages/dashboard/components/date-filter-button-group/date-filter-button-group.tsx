@@ -1,7 +1,7 @@
 import { HStack, useRadioGroup} from '@chakra-ui/react';
 import {DateType} from "../../../../types/types.ts";
 import {useFiltersStore} from "../../../../stores/use-filters.store.ts";
-import {dateFilterLabelMapper} from "../../../../utils/label-mappers.constants.ts";
+import {dateFilterLabelMapper} from "../../../../utils/mappers.ts";
 import RadioItem from "./radio-item.tsx";
 
 

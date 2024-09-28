@@ -1,6 +1,6 @@
 import {Card, CardBody, CardHeader, Stack, Text} from "@chakra-ui/react";
 import {useFiltersStore} from "../../../../stores/use-filters.store.ts";
-import {dateFilterFormatMapper, dateFilterLabelMapper} from "../../../../utils/label-mappers.constants.ts";
+import {dateFilterFormatMapper, dateFilterLabelMapper} from "../../../../utils/mappers.ts";
 import {currencyFormatter} from "../../../../utils/currency.formatter.ts";
 import TotalSalesTooltip from "./total-sales-tooltip.tsx";
 

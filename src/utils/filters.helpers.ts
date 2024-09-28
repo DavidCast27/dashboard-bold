@@ -1,21 +1,21 @@
 import {DateType, SalesType, Transaction} from "../types/types.ts";
 import {isThisMonth, isThisWeek, isToday} from "date-fns";
 
-function filterByDay(transactions: Transaction[]) {
+export function filterByDay(transactions: Transaction[]) {
   return transactions.filter(transaction => {
     const date = new Date(transaction.createdAt);
     return isToday(date)
   })
 }
 
-function filterByWeek(transactions: Transaction[]) {
+export function filterByWeek(transactions: Transaction[]) {
   return transactions.filter(transaction => {
     const date = new Date(transaction.createdAt);
     return isThisWeek(date)
   });
 }
 
-function filterByMonth(transactions: Transaction[]) {
+export function filterByMonth(transactions: Transaction[]) {
   return transactions.filter(transaction => {
     const date = new Date(transaction.createdAt);
     return isThisMonth(date)

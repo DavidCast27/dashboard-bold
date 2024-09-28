@@ -1,6 +1,6 @@
 import {Flex, Image, Show, Td, Text, Tr, useDisclosure} from "@chakra-ui/react";
 import { Transaction} from "../../../../types/types.ts";
-import {transactionStatusLabelMapper} from "../../../../utils/label-mappers.constants.ts";
+import {transactionStatusLabelMapper} from "../../../../utils/mappers.ts";
 import DetailDrawer from "../detail-drawer/detail-drawer.tsx";
 import {useTransactionDetail} from "../../hooks/use-transaction-detail.tsx";
 type Props = {
