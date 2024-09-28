@@ -10,6 +10,7 @@ import {
 import {SalesType} from "../../../../types/types.ts";
 import {ChangeEvent, useState} from "react";
 import {useFiltersStore} from "../../../../stores/use-filters.store.ts";
+import FilterIcon from "../../../../assets/icons/filter-icon.tsx";
 
 const SaleTypeFilterMenu = () => {
   const { isOpen, onToggle, onClose } = useDisclosure()
@@ -39,7 +40,13 @@ const SaleTypeFilterMenu = () => {
       isOpen={isOpen}
       onClose={onClose}>
       <PopoverTrigger>
-        <Button bgColor="white" color="bold-blue" w={{base:"full", md:"auto"}} onClick={onToggle}>Filtrar</Button>
+        <Button
+          bgColor="white"
+          color="bold-blue"
+          w={{base:"full", md:"auto"}}
+          onClick={onToggle}
+          rightIcon={<FilterIcon color="bold-blue"/>}
+        >Filtrar</Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverCloseButton />
